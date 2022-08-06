@@ -11,5 +11,3 @@ yarn-error.log
 /logs
 index.local.ts
 keys
-data/
-!data/.gitkeep
