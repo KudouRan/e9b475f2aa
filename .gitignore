@@ -9,5 +9,4 @@ temp/**
 /src/config/config.json
 yarn-error.log
 /logs
-index.local.ts
 keys
