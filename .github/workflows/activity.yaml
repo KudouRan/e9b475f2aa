@@ -3,7 +3,7 @@ name: activity_list
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 16 1/3 * *'
+    - cron: '0 16 * * *'
   push:
 
 jobs:
