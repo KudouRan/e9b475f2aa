@@ -1,20 +1,20 @@
 import type { ApiBaseProp } from './bili.dto';
 
 export type TopicRes = ApiBaseProp<{
+  related_topics: Relatedtopics;
   topic_card_list: Topiccardlist;
-  related_topics: unknown;
 }>;
 
 interface Topiccardlist {
-  items: Item3[];
-  offset: string;
   has_more: boolean;
+  items: Item2[];
+  offset: string;
   topic_sort_by_conf: Topicsortbyconf;
 }
 
 interface Topicsortbyconf {
-  default_sort_by: number;
   all_sort_by: Allsortby[];
+  default_sort_by: number;
   show_sort_by: number;
 }
 
@@ -23,26 +23,41 @@ interface Allsortby {
   sort_name: string;
 }
 
-interface Item3 {
-  topic_type: string;
+interface Item2 {
   dynamic_card_item: Dynamiccarditem;
+  topic_type: string;
 }
 
 interface Dynamiccarditem {
+  basic: Basic;
   id_str: string;
+  modules: Modules;
   type: string;
   visible: boolean;
-  topic_id: number;
-  basic: Basic;
-  modules: Modules;
 }
 
 interface Modules {
   module_author: Moduleauthor;
   module_dynamic: Moduledynamic;
-  module_stat: Modulestat;
-  module_interaction: unknown;
   module_more: Modulemore;
+  module_stat: Modulestat;
+}
+
+interface Modulestat {
+  comment: Comment;
+  forward: Comment;
+  like: Like;
+}
+
+interface Like {
+  count: number;
+  forbidden: boolean;
+  status: boolean;
+}
+
+interface Comment {
+  count: number;
+  forbidden: boolean;
 }
 
 interface Modulemore {
@@ -50,164 +65,313 @@ interface Modulemore {
 }
 
 interface Threepointitem {
-  type: string;
   label: string;
-}
-
-interface Modulestat {
-  forward: Forward;
-  comment: Forward;
-  like: Forward;
-}
-
-interface Forward {
-  count: number;
-  forbidden: boolean;
-  text: string;
+  type: string;
 }
 
 interface Moduledynamic {
-  desc: Desc;
-  major: Major;
   additional?: Additional;
-}
-
-interface Additional {
-  type: string;
-  goods: Goods;
-}
-
-interface Goods {
-  head_text: string;
-  head_icon: string;
-  items: Item2[];
-}
-
-interface Item2 {
-  cover: string;
-  name: string;
-  brief: string;
-  jump_url: string;
-  jump_desc: string;
-  id: number;
+  desc?: any;
+  major: Major;
+  topic?: any;
 }
 
 interface Major {
+  opus: Opus;
   type: string;
-  draw: Draw;
 }
 
-interface Draw {
-  id: number;
-  items: Item[];
+interface Opus {
+  fold_action: string[];
+  jump_url: string;
+  pics: Pic[];
+  summary: Summary;
+  title?: any;
 }
 
-interface Item {
-  src: string;
-  width: number;
-  height: number;
-}
-
-interface Desc {
-  text: string;
+interface Summary {
   rich_text_nodes: Richtextnode[];
+  text: string;
 }
 
 interface Richtextnode {
-  text: string;
   orig_text: string;
+  text: string;
   type: string;
   jump_url?: string;
   rid?: string;
-  icon_url?: string;
+  emoji?: Emoji;
+  goods?: Goods2;
   icon_name?: string;
-  good?: Good;
 }
 
-interface Good {
-  type: number;
-  text: string;
+interface Goods2 {
   jump_url: string;
+  type: number;
+}
+
+interface Emoji {
   icon_url: string;
+  size: number;
+  text: string;
+  type: number;
+}
+
+interface Pic {
+  height: number;
+  size: number;
+  url: string;
+  width: number;
+}
+
+interface Additional {
+  goods?: Goods;
+  type: string;
+  upower_lottery?: Upowerlottery;
+}
+
+interface Upowerlottery {
+  button: Button;
+  desc: Desc;
+  hint: Hint;
+  jump_url: string;
+  rid: number;
+  state: number;
+  title: string;
+  up_mid: number;
+  upower_action_state: number;
+}
+
+interface Hint {
+  style: number;
+  text: string;
+}
+
+interface Desc {
+  jump_url: string;
+  style: number;
+  text: string;
+}
+
+interface Button {
+  check: Check;
+  status: number;
+  type: number;
+}
+
+interface Check {
+  disable: number;
+  icon_url: string;
+  text: string;
+  toast: string;
+}
+
+interface Goods {
+  head_icon: string;
+  head_text: string;
+  items: Item[];
+  jump_url: string;
+}
+
+interface Item {
+  brief: string;
+  cover: string;
+  id: string;
+  jump_desc: string;
+  jump_url: string;
+  name: string;
+  price: string;
 }
 
 interface Moduleauthor {
-  type: string;
+  avatar: Avatar;
   face: string;
-  name: string;
-  mid: number;
-  face_nft: number;
-  following: boolean;
-  pub_time: string;
-  pub_action: string;
-  pub_ts: number;
-  pendant: Pendant;
-  vip: Vip;
-  official_verify: Officialverify;
-  decorate: Decorate;
-  is_top: boolean;
-}
-
-interface Decorate {
-  id: number;
-  type: number;
-  name: string;
-  card_url: string;
+  face_nft: boolean;
+  following?: any;
   jump_url: string;
-  fan: Fan;
-}
-
-interface Fan {
-  is_fan: boolean;
-  color: string;
-  num_str: string;
-  number: number;
-}
-
-interface Officialverify {
-  type: number;
+  label: string;
+  mid: number;
+  name: string;
+  official_verify: Officialverify;
+  pendant: Pendant;
+  pub_action: string;
+  pub_location_text: string;
+  pub_time: string;
+  pub_ts: number;
+  type: string;
+  vip: Vip;
 }
 
 interface Vip {
-  type: number;
-  status: number;
-  label: Label;
-  due_date: number;
-  role: number;
   avatar_subscript: number;
+  avatar_subscript_url: string;
+  due_date: number;
+  label: Label;
   nickname_color: string;
+  status: number;
+  theme_type: number;
+  type: number;
 }
 
 interface Label {
+  bg_color: string;
+  bg_style: number;
+  border_color: string;
+  img_label_uri_hans: string;
+  img_label_uri_hans_static: string;
+  img_label_uri_hant: string;
+  img_label_uri_hant_static: string;
+  label_theme: string;
   path: string;
   text: string;
-  label_theme: string;
   text_color: string;
-  bg_style: number;
-  bg_color: string;
-  border_color: string;
   use_img_label: boolean;
-  img_label_uri_hans: string;
-  img_label_uri_hant: string;
-  img_label_uri_hans_static: string;
-  img_label_uri_hant_static: string;
 }
 
 interface Pendant {
-  pid: number;
-  name: string;
+  expire: number;
   image: string;
   image_enhance: string;
+  image_enhance_frame: string;
+  n_pid: number;
+  name: string;
+  pid: number;
+}
+
+interface Officialverify {
+  desc: string;
+  type: number;
+}
+
+interface Avatar {
+  container_size: Containersize;
+  fallback_layers: Fallbacklayers;
+  layers: Layer3[];
+  mid: string;
+}
+
+interface Layer3 {
+  is_critical_group?: boolean;
+  layers: Layer2[];
+}
+
+interface Layer2 {
+  general_spec: Generalspec;
+  layer_config: Layerconfig;
+  resource: Resource2;
+  visible: boolean;
+}
+
+interface Resource2 {
+  res_image?: Resimage;
+  res_type: number;
+  res_animation?: Resanimation;
+}
+
+interface Resanimation {
+  webp_src: Webpsrc;
+}
+
+interface Webpsrc {
+  remote: Remote;
+  src_type: number;
+}
+
+interface Fallbacklayers {
+  is_critical_group: boolean;
+  layers: Layer[];
+}
+
+interface Layer {
+  general_spec: Generalspec;
+  layer_config: Layerconfig;
+  resource: Resource;
+  visible: boolean;
+}
+
+interface Resource {
+  res_image: Resimage;
+  res_type: number;
+}
+
+interface Resimage {
+  image_src: Imagesrc;
+}
+
+interface Imagesrc {
+  placeholder?: number;
+  remote?: Remote;
+  src_type: number;
+  local?: number;
+}
+
+interface Remote {
+  bfs_style: string;
+  url: string;
+}
+
+interface Layerconfig {
+  is_critical?: boolean;
+  tags: Tags;
+}
+
+interface Tags {
+  AVATAR_LAYER?: Relatedtopics;
+  GENERAL_CFG?: GENERALCFG;
+  PENDENT_LAYER?: Relatedtopics;
+  ICON_LAYER?: Relatedtopics;
+}
+
+interface GENERALCFG {
+  config_type: number;
+  general_config: Generalconfig;
+}
+
+interface Generalconfig {
+  web_css_style: Webcssstyle;
+}
+
+interface Webcssstyle {
+  borderRadius: string;
+  'background-color'?: string;
+  border?: string;
+  boxSizing?: string;
+}
+
+interface Generalspec {
+  pos_spec: Posspec;
+  render_spec: Renderspec;
+  size_spec: Containersize;
+}
+
+interface Renderspec {
+  opacity: number;
+}
+
+interface Posspec {
+  axis_x: number;
+  axis_y: number;
+  coordinate_pos: number;
+}
+
+interface Containersize {
+  height: number;
+  width: number;
 }
 
 interface Basic {
-  rid_str: string;
-  comment_type: number;
   comment_id_str: string;
-  like_show_icon: Likeshowicon;
+  comment_type: number;
+  jump_url: string;
+  like_icon: Likeicon;
+  rid_str: string;
 }
 
-interface Likeshowicon {
-  new_icon_id: number;
+interface Likeicon {
   action_url: string;
+  end_url: string;
+  id: number;
+  start_url: string;
 }
+
+interface Relatedtopics {}
